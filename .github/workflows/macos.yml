@@ -1,0 +1,33 @@
+name: Build DukoAI Connect macOS
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-14
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Rust target
+        run: |
+          rustup toolchain install 1.90.0 --profile minimal
+          rustup default 1.90.0
+          rustup target add aarch64-apple-darwin
+      - name: Build DukoAI macOS package
+        run: pnpm build:macos
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DukoAI-Connect-macOS-arm64
+          path: |
+            release/DukoAI-Connect-*-macOS-arm64.zip
+            release/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
