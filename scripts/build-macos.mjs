@@ -16,6 +16,8 @@ function run(command, args, options = {}) {
   return result.stdout;
 }
 run(process.execPath, [path.join(root, 'node_modules/@tauri-apps/cli/tauri.js'),
+  'icon', path.join(root, 'public/dukoai.svg'), '--output', path.join(root, 'src-tauri/icons')]);
+run(process.execPath, [path.join(root, 'node_modules/@tauri-apps/cli/tauri.js'),
   'build', '--target', target, '--bundles', 'app', '--', '--locked']);
 
 const source = path.join(root, 'src-tauri/target', target, 'release/bundle/macos/DukoAI Connect.app');
