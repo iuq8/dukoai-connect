@@ -1,5 +1,5 @@
 use std::fs;
-use supergpt_connect_lib::{
+use dukoai_connect_lib::{
     adapter,
     models::{Client, ValidatedInput},
     storage::{self, FileKind, Paths},
@@ -41,9 +41,9 @@ fn codex_merge_keeps_comments_mcp_and_permissions_and_restores_login_exactly() {
     assert!(merged.contains("approval_policy = \"on-request\""));
     assert!(merged.contains("[model_providers.original]"));
     let doc = merged.parse::<toml_edit::DocumentMut>().unwrap();
-    assert_eq!(doc["model_provider"].as_str(), Some("supergpt-connect"));
+    assert_eq!(doc["model_provider"].as_str(), Some("dukoai-connect"));
     assert_eq!(
-        doc["model_providers"]["supergpt-connect"]["base_url"].as_str(),
+        doc["model_providers"]["dukoai-connect"]["base_url"].as_str(),
         Some("https://api.example.test/v1")
     );
     let encoded = serde_json::to_string(&result).unwrap();

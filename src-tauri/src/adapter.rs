@@ -135,14 +135,14 @@ pub fn apply(paths: &Paths, input: ValidatedInput) -> Result<ImportResult, Strin
             }
             for (key, val) in [
                 ("model", input.model.as_str()),
-                ("model_provider", "supergpt-connect"),
+                ("model_provider", "dukoai-connect"),
                 ("cli_auth_credentials_store", "file"),
                 ("web_search", "disabled"),
             ] {
                 patch.set.push((KeyPath::new(&[key]), value(val)));
             }
             patch.set.push((
-                KeyPath::new(&["model_providers", "supergpt-connect"]),
+                KeyPath::new(&["model_providers", "dukoai-connect"]),
                 Item::Table(provider),
             ));
             if let Some(catalog) = &input.catalog {

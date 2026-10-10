@@ -24,13 +24,13 @@ const source = path.join(root, 'src-tauri/target', target, 'release/bundle/macos
 const actual = run('/usr/libexec/PlistBuddy', ['-c', 'Print :CFBundleShortVersionString', path.join(source, 'Contents/Info.plist')],
   { encoding: 'utf8', stdio: 'pipe' }).trim();
 if (actual !== version) throw new Error('App version does not match package.json');
-const binary = fs.readFileSync(path.join(source, 'Contents/MacOS/supergpt-connect'));
+const binary = fs.readFileSync(path.join(source, 'Contents/MacOS/dukoai-connect'));
 if (binary.readUInt32LE(0) !== 0xfeedfacf || binary.readUInt32LE(4) !== 0x0100000c) {
   throw new Error('Expected an Apple Silicon executable');
 }
 const release = path.join(root, 'release');
 fs.mkdirSync(release, { recursive: true });
-const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'supergpt-macos-package-'));
+const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'dukoai-macos-package-'));
 try {
   const folder = path.join(stage, 'DukoAI Connect');
   fs.mkdirSync(folder);
@@ -52,7 +52,7 @@ try {
 若系统拦截，请先确认下载自 https://dukoai.com，再按系统提示处理。
 
 定制版下载与源码：https://dukoai.com
-原始开源项目：https://github.com/superpilot69/supergpt-connect（MIT）
+原始开源项目：https://github.com/iuq8/dukoai-connect（MIT）
 `);
   const name = `DukoAI-Connect-${version}-macOS-arm64.zip`;
   const archive = path.join(stage, name);

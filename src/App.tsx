@@ -124,7 +124,7 @@ function Modal({
 }
 function initialTheme(): "light" | "dark" {
   try {
-    return localStorage.getItem("supergpt-connect.theme") === "dark"
+    return localStorage.getItem("dukoai-connect.theme") === "dark"
       ? "dark"
       : "light";
   } catch {
@@ -186,7 +186,7 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
-      localStorage.setItem("supergpt-connect.theme", theme);
+      localStorage.setItem("dukoai-connect.theme", theme);
     } catch {
       /* Session theme still works. */
     }

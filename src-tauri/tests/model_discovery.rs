@@ -2,7 +2,7 @@ use std::{
     io::{Read, Write},
     net::TcpListener,
 };
-use supergpt_connect_lib::models::{self, Client, DiscoveryInput};
+use dukoai_connect_lib::models::{self, Client, DiscoveryInput};
 
 #[test]
 fn url_normalization_and_model_catalog_validation() {

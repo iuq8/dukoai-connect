@@ -13,7 +13,7 @@ export const DEFAULT_STATION: Station = {
   name: "DukoAI",
   baseUrl: "https://dukoai.com",
 };
-export const STATION_STORAGE_KEY = "supergpt-connect.stations.v1";
+export const STATION_STORAGE_KEY = "dukoai-connect.stations.v1";
 
 export function normalizeStationUrl(value: string): string {
   if (value.trim().length > 2048)

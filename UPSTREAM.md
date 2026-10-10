@@ -23,6 +23,6 @@
 未包含上游的代理转发、自动故障切换、统计、MCP/Skills 管理、订阅登录、云同步、托盘、自动更新或深链接处理器。没有继承上游更新地址或应用标识，也不读取 CC Switch 数据库。
 
 
-品牌资源：应用界面与打包图标使用 SuperGPT 的 S 标志，配色来自 [SuperGPT 控制台](https://console.supergpt.dev)。
+品牌资源：应用界面与打包图标使用 DukoAI 的 D 标志，配色来自 [DukoAI 控制台](https://dukoai.com)。
 
 VS Code 注释保留使用 `jsonc-parser` 0.34.0（MIT），许可证随包附带于 `licenses/jsonc-parser-MIT.txt`。

@@ -1,6 +1,6 @@
 use serde_json::{json, Value};
 use std::fs;
-use supergpt_connect_lib::{
+use dukoai_connect_lib::{
     adapter,
     desktop_config::PROFILE_ID,
     models::{Client, ValidatedInput},
@@ -185,11 +185,11 @@ fn codex_desktop_and_cli_share_catalog_credentials_and_restore_point() {
         .parse::<toml_edit::DocumentMut>()
         .unwrap();
     assert_eq!(doc["cli_auth_credentials_store"].as_str(), Some("file"));
-    assert_eq!(doc["model_provider"].as_str(), Some("supergpt-connect"));
+    assert_eq!(doc["model_provider"].as_str(), Some("dukoai-connect"));
     assert!(doc["model_catalog_json"]
         .as_str()
         .unwrap()
-        .ends_with("supergpt-models.json"));
+        .ends_with("dukoai-models.json"));
     storage::restore(&paths, Client::CodexDesktop).unwrap();
     assert!(!paths.has_backup(Client::Codex));
     for kind in [

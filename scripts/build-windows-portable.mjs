@@ -19,13 +19,14 @@ function run(command, args, cwd = root) {
   if (result.status !== 0) throw new Error(`${path.basename(command)} exited with ${result.status}`);
 }
 if (!packageOnly) {
+  run(process.execPath, [path.join(root, 'node_modules/@tauri-apps/cli/tauri.js'), 'icon', path.join(root, 'public/dukoai.svg'), '--output', path.join(root, 'src-tauri/icons')]);
   const args = [path.join(root, 'node_modules/@tauri-apps/cli/tauri.js'), 'build', '--target', target, '--no-bundle'];
   if (process.platform !== 'win32') args.push('--runner', 'cargo-xwin');
   args.push('--', '--locked');
   run(process.execPath, args);
 }
 
-const executable = path.join(root, 'src-tauri/target', target, 'release/supergpt-connect.exe');
+const executable = path.join(root, 'src-tauri/target', target, 'release/dukoai-connect.exe');
 const pe = fs.readFileSync(executable);
 if (pe.length < 512 || pe.toString('ascii', 0, 2) !== 'MZ') throw new Error('Missing Windows PE executable');
 if (!pe.includes(Buffer.from(version + '\0', 'utf16le'))) throw new Error('EXE version does not match package.json; rebuild first');
@@ -58,7 +59,7 @@ if (extraRuntime.length) throw new Error(`Portable EXE still requires unbundled 
 
 const release = path.join(root, 'release');
 fs.mkdirSync(release, { recursive: true });
-const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'supergpt-windows-package-'));
+const stage = fs.mkdtempSync(path.join(os.tmpdir(), 'dukoai-windows-package-'));
 const folder = path.join(stage, 'DukoAI Connect');
 const archiveName = `DukoAI-Connect-${version}-Windows-x64-portable.zip`;
 try {
@@ -94,9 +95,9 @@ Claude / Codex 客户端需要另外安装。本工具只配置当前 Windows �
 WSL、远程开发环境有自己的配置，须在对应环境另行设置。
 应用关闭后不会常驻。配置与恢复记录保存在当前用户目录；删除 EXE 不会自动恢复配置。
 ${process.platform === 'win32' ? '本包在 Windows 上构建。' : '本包由其他系统交叉编译。'}测试范围见：
-https://github.com/superpilot69/supergpt-connect/blob/main/VERIFICATION.md
+https://github.com/iuq8/dukoai-connect
 
-源码与许可：https://github.com/superpilot69/supergpt-connect
+源码与许可：https://github.com/iuq8/dukoai-connect
 `;
   // ASCII filenames also extract correctly in older Windows ZIP tools; contents are Chinese UTF-8.
   fs.writeFileSync(path.join(folder, 'README.txt'), '\ufeff' + instructions.replace(/\n/g, '\r\n'));

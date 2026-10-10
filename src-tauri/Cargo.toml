@@ -1,19 +1,19 @@
 [package]
-name = "supergpt-connect"
+name = "dukoai-connect"
 version = "0.1.0"
 description = "A minimal Claude Code and Codex API configurator, based on CC Switch"
 edition = "2021"
 rust-version = "1.85"
 license = "MIT"
-repository = "https://github.com/superpilot69/supergpt-connect"
-default-run = "supergpt-connect"
+repository = "https://github.com/iuq8/dukoai-connect"
+default-run = "dukoai-connect"
 
 [lib]
-name = "supergpt_connect_lib"
+name = "dukoai_connect_lib"
 crate-type = ["rlib", "cdylib", "staticlib"]
 
 [[bin]]
-name = "supergpt-connect"
+name = "dukoai-connect"
 path = "src/main.rs"
 required-features = ["desktop"]
 
